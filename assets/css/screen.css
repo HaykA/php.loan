@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,400i,500,500i,700,700i');
+
+.nav-tabs {
+    margin-bottom: 15px;
+}
+
+.loan-container table tbody td,
+.loan-container table thead th,
+.loan-container table tfoot td,
+.loan-container table tfoot th {
+    text-align: right;
+}
+
+.loan-container table tfoot th {
+    text-transform: uppercase;
+}
+
+.loan-container table tfoot {
+    border-top: 7px double #006add;
+}
+
+.loan-container table tfoot td,
+.loan-container table tfoot th {
+    background-color: #c3ddff;
+    font-weight: 600;
+}
+
+.loan-container table tbody,
+.loan-container table tfoot td {
+    font-family: "Roboto Mono", monospace;
+}
+
+.loan-container table thead th,
+.loan-details table th {
+    background-color: #006add;
+    color: #fff;
+}
+
+.tab-pane .panel {
+    margin-top: 15px;
+}
+
+form fieldset {
+    margin-bottom: 15px;
+}
+
+footer {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    background-color: #555;
+    color: #fff;
+    padding: 3px;
+    text-align: center;
+}
+
+.container {
+    margin-bottom: 35px;
+}
+
+@media screen and (max-width: 480px) {
+    .loan-container table {
+        font-size: 0.9rem;
+    }
+
+    .loan-container .panel {
+        min-width: 400px;
+    }
+
+    .not-smart {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 767px) {
+    .loan-container table {
+        font-size: 1.1rem;
+    }
+}
+
+@media screen and (min-width: 481px) {
+    .smart-only {
+        display: none;
+    }
+}

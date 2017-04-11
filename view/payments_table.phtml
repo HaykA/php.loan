@@ -1,0 +1,138 @@
+<main class="container container-fluid">
+    <h1>Loan - Payments Table</h1>
+
+    <?php
+    $a = new \NumberFormatter("nl-BE", \NumberFormatter::DECIMAL);
+    $a->setAttribute(\NumberFormatter::MAX_FRACTION_DIGITS, 2);
+    $a->setAttribute(\NumberFormatter::MIN_FRACTION_DIGITS, 2);
+    ?>
+
+    <div class="loan-details">
+        <table class="table table-hover table-bordered alle-trekkingen">
+            <tbody>
+            <tr>
+                <th>Loan</th>
+                <td><?php echo $a->format($graduatedPaymentLoan->getCapital()) ?> EUR</td>
+            </tr>
+            <tr>
+                <th>Rate</th>
+                <td><?php echo $a->format($graduatedPaymentLoan->getRate()) ?> %</td>
+            </tr>
+            <tr>
+                <th>Years</th>
+                <td><?php echo $graduatedPaymentLoan->getYears() ?></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#graduated" aria-controls="trekkingen" role="tab" data-toggle="tab">Graduated Payment</a>
+        </li>
+
+        <li role="presentation">
+            <a href="#fixed" aria-controls="aantallen" role="tab" data-toggle="tab">Fixed Payment</a>
+        </li>
+    </ul>
+
+    <a href="../loan" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i> Return</a>
+
+    <div class="loan-container tab-content">
+        <div role="tabpanel" class="tab-pane active" id="graduated">
+            <div class="panel panel-primary top-spaced">
+                <table class="table table-hover table-bordered alle-trekkingen">
+                    <thead>
+                    <tr>
+                        <th><span class="not-smart">Year Index</span>
+                            <span class="smart-only">Y/I</span></th>
+                        <th><span class="not-smart">Repayment</span>
+                            <span class="smart-only">RP</span></th>
+                        <th><span class="not-smart">Interest (EUR)</span>
+                            <span class="smart-only">&euro; Int</span></th>
+                        <th><span class="not-smart">Annual Payment (EUR)</span>
+                            <span class="smart-only">&euro; AP</span></th>
+                        <th><span class="not-smart">Monthly Payment (EUR)</span>
+                            <span class="smart-only">&euro; MP</span></th>
+                        <th><span class="not-smart">Remaining Capital (EUR)</span>
+                            <span class="smart-only">&euro; RC</span></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($graduatedPaymentLoan->getPaymentTable() as $payment) { ?>
+                        <tr>
+                            <td><?php echo $payment->getYearIndex() ?></td>
+                            <td><?php echo $a->format($payment->getRepayment()) ?></td>
+                            <td><?php echo $a->format($payment->getInterest()) ?></td>
+                            <td><?php echo $a->format($payment->getAnnualPaymentAmount()) ?></td>
+                            <td><?php echo $a->format($payment->getMonthlyPaymentAmount()) ?></td>
+                            <td><?php echo $a->format($payment->getRemainingCapital()) ?></td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th colspan="5"><span class="not-smart">Total Interest (EUR)</span>
+                            <span class="smart-only">&euro; Total Int.</span></th>
+                        <td><?php echo $a->format($graduatedPaymentLoan->getTotalInterest()) ?></td>
+                    </tr>
+                    <tr>
+                        <th colspan="5"><span class="not-smart">Total Amount (EUR)</span>
+                            <span class="smart-only">&euro; Total</span></th>
+                        <td><?php echo $a->format($graduatedPaymentLoan->getTotalAmount()) ?></td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="fixed">
+            <div class="panel panel-primary top-spaced">
+                <table class="table table-hover table-bordered alle-trekkingen">
+                    <thead>
+                    <tr>
+                        <th><span class="not-smart">Year Index</span>
+                            <span class="smart-only">Y/I</span></th>
+                        <th><span class="not-smart">Repayment</span>
+                            <span class="smart-only">RP</span></th>
+                        <th><span class="not-smart">Interest (EUR)</span>
+                            <span class="smart-only">&euro; Int</span></th>
+                        <th><span class="not-smart">Annual Payment (EUR)</span>
+                            <span class="smart-only">&euro; AP</span></th>
+                        <th><span class="not-smart">Monthly Payment (EUR)</span>
+                            <span class="smart-only">&euro; MP</span></th>
+                        <th><span class="not-smart">Remaining Capital (EUR)</span>
+                            <span class="smart-only">&euro; RC</span></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($fixedPaymentLoan->getPaymentTable() as $payment) { ?>
+                        <tr>
+                            <td><?php echo $payment->getYearIndex() ?></td>
+                            <td><?php echo $a->format($payment->getRepayment()) ?></td>
+                            <td><?php echo $a->format($payment->getInterest()) ?></td>
+                            <td><?php echo $a->format($payment->getAnnualPaymentAmount()) ?></td>
+                            <td><?php echo $a->format($payment->getMonthlyPaymentAmount()) ?></td>
+                            <td><?php echo $a->format($payment->getRemainingCapital()) ?></td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th colspan="5"><span class="not-smart">Total Interest (EUR)</span>
+                            <span class="smart-only">&euro; Total Int.</span></th>
+                        <td><?php echo $a->format($fixedPaymentLoan->getTotalInterest()) ?></td>
+                    </tr>
+                    <tr>
+                        <th colspan="5"><span class="not-smart">Total Amount (EUR)</span>
+                            <span class="smart-only">&euro; Total</span></th>
+                        <td><?php echo $a->format($fixedPaymentLoan->getTotalAmount()) ?></td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <a href="../loan" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i> Return</a>
+</main>
